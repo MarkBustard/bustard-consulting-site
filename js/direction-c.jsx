@@ -493,7 +493,7 @@ function DirectionC() {
             {/* Logo grid — five rows matching the reference (5 / 6 / 6 / 7 / 7).
                 Each row is its own grid so column counts can differ row to row
                 while logos sit on a consistent vertical rhythm. */}
-            <div style={{ marginTop: 56, display: 'flex', flexDirection: 'column', rowGap: 8 }}>
+            <div className="bc-logo-grid" style={{ marginTop: 56, display: 'flex', flexDirection: 'column', rowGap: 8 }}>
               {[
                 // Row 1 — 5 marks. Heights tuned to match the reference:
                 // wide square / tall composite marks get more height,
@@ -544,7 +544,7 @@ function DirectionC() {
                   { name: 'OMEGA',              src: 'assets/creds-trimmed/omega.png',              h: 52 },
                 ],
               ].map((row, ri) => (
-                <div key={ri} style={{
+                <div key={ri} className="bc-logo-row" style={{
                   display: 'grid',
                   gridTemplateColumns: `repeat(${row.length}, 1fr)`,
                   columnGap: 28,
@@ -591,8 +591,8 @@ function DirectionC() {
                 <div style={{ marginTop: 8 }}>
                   <a href="https://www.linkedin.com/in/markbustard/"
                      style={{ color: 'var(--bronze)', display: 'inline-flex', alignItems: 'center', gap: 10 }}
-                     target="_blank" rel="noopener">
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="var(--warm-white)" aria-hidden="true">
+                     target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="var(--warm-white)" aria-hidden="true" style={{ pointerEvents: 'none' }}>
                       <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.13 1.45-2.13 2.94v5.66H9.37V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z" />
                     </svg>
                     /in/markbustard

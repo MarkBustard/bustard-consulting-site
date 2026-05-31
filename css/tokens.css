@@ -239,3 +239,127 @@ a:hover { opacity: 0.65; }
 .bc-sweep-11 { -webkit-mask-image: url('assets/sweeps/11.svg'); mask-image: url('assets/sweeps/11.svg'); aspect-ratio: 260.83 / 113.55; }
 .bc-sweep-12 { -webkit-mask-image: url('assets/sweeps/12.svg'); mask-image: url('assets/sweeps/12.svg'); aspect-ratio: 247.43 / 73.73; }
 .bc-sweep-13 { -webkit-mask-image: url('assets/sweeps/13.svg'); mask-image: url('assets/sweeps/13.svg'); aspect-ratio: 247.43 / 73.29; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   MOBILE RESPONSIVENESS  ·  applies only ≤768px and ≤480px
+   Desktop layout & typography are untouched. These rules override the
+   React inline styles via !important and [style*=] attribute selectors;
+   they do not change copy, colours, fonts or the navigation structure.
+   ═══════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* Homepage renders inside a fixed 1440px artboard → make it fluid */
+  #root [style*="width: 1440px"] { width: 100% !important; max-width: 100% !important; }
+
+  /* Collapse every multi-column grid to a single readable column.
+     (Fixes the spine offset that squeezed page-header H1s into slivers.)
+     Use minmax(0,1fr) + min-width:0 so wide children (carousels, images,
+     long tag strings) can SHRINK instead of forcing the column — and the
+     whole page — wider than the phone viewport. */
+  #root [style*="grid-template-columns"] {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 24px !important;
+  }
+  #root [style*="grid-template-columns"] > * { min-width: 0 !important; }
+  #root img { max-width: 100% !important; }
+
+  /* Trim oversized desktop padding on full-width bands */
+  #root section, #root article, #root footer {
+    padding-left: 22px !important;
+    padding-right: 22px !important;
+  }
+  /* Footer bars are space-between flex rows — let them wrap on mobile */
+  #root footer { flex-wrap: wrap !important; gap: 12px 24px !important; }
+  #root section[style*="padding"],
+  #root article[style*="padding"] {
+    padding-top: 52px !important;
+    padding-bottom: 52px !important;
+  }
+
+  /* Sticky nav header — allow wrap, shrink, keep tappable */
+  #root header {
+    height: auto !important;
+    min-height: 60px !important;
+    padding: 12px 20px !important;
+    flex-wrap: wrap !important;
+    gap: 10px 18px !important;
+  }
+  #root header nav {
+    gap: 14px 18px !important;
+    flex-wrap: wrap !important;
+    font-size: 12px !important;
+  }
+  /* Shrink the wordmark in the nav only */
+  #root header [style*="width: 170px"],
+  #root header [style*="width: 140px"] { width: 116px !important; }
+
+  /* HERO / PAGE-HEADER headline — readable mobile scale, natural wrap */
+  #root h1 {
+    font-size: clamp(42px, 11vw, 56px) !important;
+    line-height: 1.0 !important;
+    letter-spacing: -0.01em !important;
+    max-width: 100% !important;
+  }
+
+  /* Oversized display type, scaled down by its inline size.
+     Body copy (≤16px and decimal sizes) is left untouched. */
+  #root [style*="font-size: 96px"] { font-size: clamp(42px,12vw,56px) !important; line-height:1.0 !important;  max-width:100% !important; }
+  #root [style*="font-size: 64px"] { font-size: clamp(40px,10vw,52px) !important; line-height:1.04 !important; max-width:100% !important; }
+  #root [style*="font-size: 60px"] { font-size: clamp(30px,8vw,40px) !important;  line-height:1.12 !important; max-width:100% !important; }
+  #root [style*="font-size: 44px"] { font-size: clamp(28px,7.5vw,38px) !important; line-height:1.1 !important; }
+  #root [style*="font-size: 40px"] { font-size: clamp(27px,7vw,34px) !important;  line-height:1.1 !important; }
+  #root [style*="font-size: 38px"] { font-size: clamp(25px,6.6vw,32px) !important; line-height:1.12 !important; }
+  #root [style*="font-size: 36px"] { font-size: clamp(24px,6.4vw,32px) !important; line-height:1.15 !important; }
+  #root [style*="font-size: 34px"] { font-size: clamp(23px,6vw,30px) !important;  line-height:1.18 !important; }
+  #root [style*="font-size: 32px"] { font-size: clamp(22px,6vw,30px) !important; }
+  #root [style*="font-size: 30px"] { font-size: clamp(21px,5.6vw,28px) !important; }
+  #root [style*="font-size: 28px"] { font-size: clamp(20px,5.4vw,26px) !important; }
+  #root [style*="font-size: 26px"] { font-size: clamp(19px,5vw,24px) !important; }
+  #root [style*="font-size: 24px"] { font-size: clamp(18px,4.8vw,22px) !important; }
+  #root [style*="font-size: 22px"] { font-size: clamp(17px,4.6vw,20px) !important; }
+
+  /* A forced-nowrap heading must wrap on mobile, never clip horizontally */
+  #root [style*="nowrap"] { white-space: normal !important; }
+
+  /* Large fixed-width element (contact closing wordmark) → fluid */
+  #root [style*="width: 520px"] { width: 100% !important; max-width: 300px !important; }
+
+  /* Experience filter bar — un-stick & tighten so chips fit */
+  #root [style*="top: 76px"] { position: static !important; }
+  #root [style*="padding: 18px 96px"] { padding-left: 20px !important; padding-right: 20px !important; }
+
+  /* Experience detail modal & lightbox sizing */
+  #root [style*="padding: 48px 56px 80px"] { padding: 36px 22px 64px !important; }
+  #root [style*="100vw - 200px"] { max-width: calc(100vw - 56px) !important; max-height: calc(100vh - 120px) !important; }
+
+  /* Carousel dot indicators: a project with many images produces a long
+     fixed-width dot strip that overflows the phone. Hide the dots on
+     mobile — the Prev/Next controls and the NN / NN pill remain, so the
+     carousel stays fully navigable. */
+  #root button[aria-label^="Slide "] { display: none !important; }
+
+  /* ── Client / project logos: 2-up grid at legible, uniform size ──
+     (overrides the single-column grid collapse above — placed after it) */
+  #root .bc-logo-grid { row-gap: 18px !important; }
+  #root .bc-logo-row {
+    grid-template-columns: repeat(2, 1fr) !important;
+    column-gap: 16px !important;
+  }
+  #root .bc-logo-row > div { height: 92px !important; }
+  #root .bc-logo-row img { height: 46px !important; max-width: 88% !important; }
+}
+
+@media (max-width: 480px) {
+  #root section, #root article, #root footer {
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+  #root section[style*="padding"],
+  #root article[style*="padding"] {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+  }
+  #root h1 { font-size: clamp(40px, 12vw, 48px) !important; }
+  #root .bc-logo-row > div { height: 84px !important; }
+  #root .bc-logo-row img { height: 42px !important; }
+}
