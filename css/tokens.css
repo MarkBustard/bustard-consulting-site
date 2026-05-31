@@ -1,0 +1,241 @@
+/* ──────────────────────────────────────────────────────────
+   Bustard Consulting — Design Tokens
+   Sourced directly from BC Brand Guidelines v1
+   ────────────────────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+
+:root {
+  /* Colour — exact palette */
+  --warm-white: #F4F2EE;
+  --charcoal:   #2F332E;
+  --bronze:     #A88663;
+  --olive:      #4A4F45;
+  --warm-grey:  #E8E6E2;
+
+  /* Hairlines (bronze at low alpha) */
+  --hairline-bronze: rgba(168, 134, 99, 0.35);
+  --hairline-bronze-soft: rgba(168, 134, 99, 0.18);
+  --hairline-charcoal: rgba(47, 51, 46, 0.12);
+  --hairline-warm: rgba(244, 242, 238, 0.18);
+  /* Type families */
+  --font-display: 'Libre Baskerville', 'Times New Roman', serif;
+  --font-body: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'DM Mono', 'Courier New', monospace;
+
+  /* Wordmark — Libre Baskerville stands in for FreightDisp Pro Medium */
+  --font-wordmark: 'Libre Baskerville', 'Times New Roman', serif;
+
+  /* Grid (1920 reference / 6 col / 24 gutter / 120 outer) */
+  --grid-outer: 120px;
+  --grid-gutter: 24px;
+  --grid-col: 260px;
+  --baseline: 8px;
+
+  /* Body sizing */
+  --body-size: 15px;
+  --body-leading: 1.7;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  background: var(--warm-white);
+  color: var(--charcoal);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: var(--body-size);
+  line-height: var(--body-leading);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Reusable typography classes ──────────────────────────────── */
+
+.t-mono {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+.t-mono-sm {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.t-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  line-height: 1.1;
+}
+
+.t-serif-body {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.t-body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--charcoal);
+}
+
+.t-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bronze);
+}
+
+/* Hairlines ─────────────────────────────────────────────── */
+.rule-bronze { border: 0; border-top: 1px solid var(--hairline-bronze); }
+.rule-bronze-soft { border: 0; border-top: 1px solid var(--hairline-bronze-soft); }
+.rule-charcoal { border: 0; border-top: 1px solid var(--hairline-charcoal); }
+
+/* Links — bronze, no underline by default */
+a { color: var(--bronze); text-decoration: none; transition: opacity .2s; }
+a:hover { opacity: 0.65; }
+
+/* ─────────────────────────────────────────────────────────────────
+   Editorial nav link — bronze underline + sweep inflection.
+   Used on the homepage hero (white-on-olive) and the sticky SiteNav.
+   ───────────────────────────────────────────────────────────────── */
+.bc-navlink {
+  position: relative;
+  display: inline-block;
+  color: var(--charcoal);
+  opacity: 0.85;
+  padding-bottom: 4px;
+  letter-spacing: 0.02em;
+  transition:
+    color 320ms cubic-bezier(0.32, 0.05, 0.2, 1),
+    opacity 320ms cubic-bezier(0.32, 0.05, 0.2, 1),
+    transform 420ms cubic-bezier(0.32, 0.05, 0.2, 1);
+  will-change: transform;
+}
+.bc-navlink::after {
+  /* Bronze underline that draws in from the left. */
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: var(--bronze);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 520ms cubic-bezier(0.32, 0.05, 0.2, 1);
+}
+.bc-navlink::before {
+  /* Tiny sweep inflection — a single bronze dot that lifts on hover.
+     Reads as a small editorial mark rather than a UI underline. */
+  content: "";
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: var(--bronze);
+  opacity: 0;
+  transform: translate(-2px, -50%);
+  transition:
+    opacity 320ms cubic-bezier(0.32, 0.05, 0.2, 1),
+    transform 420ms cubic-bezier(0.32, 0.05, 0.2, 1);
+}
+.bc-navlink:hover,
+.bc-navlink:focus-visible {
+  color: var(--bronze);
+  opacity: 1;
+  /* Subtle baseline shift — link rises a hair on hover */
+  transform: translateY(-1px);
+  outline: none;
+}
+.bc-navlink:hover::after,
+.bc-navlink:focus-visible::after {
+  transform: scaleX(1);
+}
+.bc-navlink:hover::before,
+.bc-navlink:focus-visible::before {
+  opacity: 0.85;
+  transform: translate(2px, -50%);
+}
+
+/* On olive hero: links sit on the dark ground in warm-white. */
+.bc-navlink--onolive       { color: var(--warm-white); opacity: 0.82; }
+.bc-navlink--onolive:hover,
+.bc-navlink--onolive:focus-visible { color: var(--bronze); opacity: 1; }
+
+/* Accent state — current/active route. */
+.bc-navlink--accent { color: var(--bronze); opacity: 1; }
+.bc-navlink--accent::after { transform: scaleX(0.32); }
+
+/* Reduced motion — keep the colour change, drop the movement */
+@media (prefers-reduced-motion: reduce) {
+  .bc-navlink,
+  .bc-navlink::after,
+  .bc-navlink::before { transition: none; }
+  .bc-navlink:hover { transform: none; }
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Hero sweep — architectural sketching reveal, left → right.
+   Uses clip-path so it animates the filled sweep silhouette as if
+   being drawn across the canvas. Honour reduced-motion.
+   ───────────────────────────────────────────────────────────────── */
+@keyframes bc-sweep-draw {
+  from { clip-path: inset(0 100% 0 0); -webkit-clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0 0 0);    -webkit-clip-path: inset(0 0 0 0); }
+}
+.bc-sweep-anim {
+  clip-path: inset(0 100% 0 0);
+  -webkit-clip-path: inset(0 100% 0 0);
+  animation: bc-sweep-draw 2.6s cubic-bezier(0.32, 0.05, 0.2, 1) 0.35s forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .bc-sweep-anim { animation: none; clip-path: none; -webkit-clip-path: none; }
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   BC asset utilities — recolour SVG silhouettes via CSS mask.
+   Used by Wordmark / Sweep / BCMark React components and as
+   raw class hooks for static templates.
+   ───────────────────────────────────────────────────────────────── */
+
+.bc-mask {
+  display: inline-block;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  /* SVG paths have no explicit fill — force alpha mode so the
+     mask reads transparent vs opaque (black) correctly. */
+  -webkit-mask-mode: alpha;
+  mask-mode: alpha;
+  background-color: currentColor;
+}
+.bc-wordmark { -webkit-mask-image: url('assets/wordmark.svg'); mask-image: url('assets/wordmark.svg'); aspect-ratio: 315.5 / 113.17; }
+.bc-favicon  { -webkit-mask-image: url('assets/favicon.svg');  mask-image: url('assets/favicon.svg');  aspect-ratio: 1 / 1; }
+
+/* Sweep variants — width is set inline; height auto via aspect-ratio */
+.bc-sweep-01 { -webkit-mask-image: url('assets/sweeps/01.svg'); mask-image: url('assets/sweeps/01.svg'); aspect-ratio: 170.85 / 88.38; }
+.bc-sweep-02 { -webkit-mask-image: url('assets/sweeps/02.svg'); mask-image: url('assets/sweeps/02.svg'); aspect-ratio: 247.43 / 67.58; }
+.bc-sweep-03 { -webkit-mask-image: url('assets/sweeps/03.svg'); mask-image: url('assets/sweeps/03.svg'); aspect-ratio: 248.53 / 67.39; }
+.bc-sweep-04 { -webkit-mask-image: url('assets/sweeps/04.svg'); mask-image: url('assets/sweeps/04.svg'); aspect-ratio: 247.43 / 34.33; }
+.bc-sweep-05 { -webkit-mask-image: url('assets/sweeps/05.svg'); mask-image: url('assets/sweeps/05.svg'); aspect-ratio: 260.83 / 153.67; }
+.bc-sweep-06 { -webkit-mask-image: url('assets/sweeps/06.svg'); mask-image: url('assets/sweeps/06.svg'); aspect-ratio: 170.85 / 88.38; }
+.bc-sweep-07 { -webkit-mask-image: url('assets/sweeps/07.svg'); mask-image: url('assets/sweeps/07.svg'); aspect-ratio: 260.83 / 113.55; }
+.bc-sweep-08 { -webkit-mask-image: url('assets/sweeps/08.svg'); mask-image: url('assets/sweeps/08.svg'); aspect-ratio: 260.83 / 113.55; }
+.bc-sweep-09 { -webkit-mask-image: url('assets/sweeps/09.svg'); mask-image: url('assets/sweeps/09.svg'); aspect-ratio: 248.53 / 67.39; }
+.bc-sweep-10 { -webkit-mask-image: url('assets/sweeps/10.svg'); mask-image: url('assets/sweeps/10.svg'); aspect-ratio: 236.81 / 72.16; }
+.bc-sweep-11 { -webkit-mask-image: url('assets/sweeps/11.svg'); mask-image: url('assets/sweeps/11.svg'); aspect-ratio: 260.83 / 113.55; }
+.bc-sweep-12 { -webkit-mask-image: url('assets/sweeps/12.svg'); mask-image: url('assets/sweeps/12.svg'); aspect-ratio: 247.43 / 73.73; }
+.bc-sweep-13 { -webkit-mask-image: url('assets/sweeps/13.svg'); mask-image: url('assets/sweeps/13.svg'); aspect-ratio: 247.43 / 73.29; }
