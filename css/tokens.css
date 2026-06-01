@@ -1,0 +1,548 @@
+/* ──────────────────────────────────────────────────────────
+   Bustard Consulting — Design Tokens
+   Sourced directly from BC Brand Guidelines v1
+   ────────────────────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+
+:root {
+  /* Colour — exact palette */
+  --warm-white: #F4F2EE;
+  --charcoal:   #2F332E;
+  --bronze:     #A88663;
+  --olive:      #4A4F45;
+  --warm-grey:  #E8E6E2;
+
+  /* Hairlines (bronze at low alpha) */
+  --hairline-bronze: rgba(168, 134, 99, 0.35);
+  --hairline-bronze-soft: rgba(168, 134, 99, 0.18);
+  --hairline-charcoal: rgba(47, 51, 46, 0.12);
+  --hairline-warm: rgba(244, 242, 238, 0.18);
+  /* Type families */
+  --font-display: 'Libre Baskerville', 'Times New Roman', serif;
+  --font-body: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'DM Mono', 'Courier New', monospace;
+
+  /* Wordmark — Libre Baskerville stands in for FreightDisp Pro Medium */
+  --font-wordmark: 'Libre Baskerville', 'Times New Roman', serif;
+
+  /* Grid (1920 reference / 6 col / 24 gutter / 120 outer) */
+  --grid-outer: 120px;
+  --grid-gutter: 24px;
+  --grid-col: 260px;
+  --baseline: 8px;
+
+  /* Body sizing */
+  --body-size: 15px;
+  --body-leading: 1.7;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  background: var(--warm-white);
+  color: var(--charcoal);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: var(--body-size);
+  line-height: var(--body-leading);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Reusable typography classes ──────────────────────────────── */
+
+.t-mono {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+.t-mono-sm {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.t-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  line-height: 1.1;
+}
+
+.t-serif-body {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.t-body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--charcoal);
+}
+
+.t-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bronze);
+}
+
+/* Hairlines ─────────────────────────────────────────────── */
+.rule-bronze { border: 0; border-top: 1px solid var(--hairline-bronze); }
+.rule-bronze-soft { border: 0; border-top: 1px solid var(--hairline-bronze-soft); }
+.rule-charcoal { border: 0; border-top: 1px solid var(--hairline-charcoal); }
+
+/* Links — bronze, no underline by default */
+a { color: var(--bronze); text-decoration: none; transition: opacity .2s; }
+a:hover { opacity: 0.65; }
+
+/* ─────────────────────────────────────────────────────────────────
+   Editorial nav link — bronze underline + sweep inflection.
+   Used on the homepage hero (white-on-olive) and the sticky SiteNav.
+   ───────────────────────────────────────────────────────────────── */
+.bc-navlink {
+  position: relative;
+  display: inline-block;
+  color: var(--charcoal);
+  opacity: 0.85;
+  padding-bottom: 4px;
+  letter-spacing: 0.02em;
+  transition:
+    color 320ms cubic-bezier(0.32, 0.05, 0.2, 1),
+    opacity 320ms cubic-bezier(0.32, 0.05, 0.2, 1),
+    transform 420ms cubic-bezier(0.32, 0.05, 0.2, 1);
+  will-change: transform;
+}
+.bc-navlink::after {
+  /* Bronze underline that draws in from the left. */
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: var(--bronze);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 520ms cubic-bezier(0.32, 0.05, 0.2, 1);
+}
+.bc-navlink::before {
+  /* Tiny sweep inflection — a single bronze dot that lifts on hover.
+     Reads as a small editorial mark rather than a UI underline. */
+  content: "";
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: var(--bronze);
+  opacity: 0;
+  transform: translate(-2px, -50%);
+  transition:
+    opacity 320ms cubic-bezier(0.32, 0.05, 0.2, 1),
+    transform 420ms cubic-bezier(0.32, 0.05, 0.2, 1);
+}
+.bc-navlink:hover,
+.bc-navlink:focus-visible {
+  color: var(--bronze);
+  opacity: 1;
+  /* Subtle baseline shift — link rises a hair on hover */
+  transform: translateY(-1px);
+  outline: none;
+}
+.bc-navlink:hover::after,
+.bc-navlink:focus-visible::after {
+  transform: scaleX(1);
+}
+.bc-navlink:hover::before,
+.bc-navlink:focus-visible::before {
+  opacity: 0.85;
+  transform: translate(2px, -50%);
+}
+
+/* On olive hero: links sit on the dark ground in warm-white. */
+.bc-navlink--onolive       { color: var(--warm-white); opacity: 0.82; }
+.bc-navlink--onolive:hover,
+.bc-navlink--onolive:focus-visible { color: var(--bronze); opacity: 1; }
+
+/* Accent state — current/active route. */
+.bc-navlink--accent { color: var(--bronze); opacity: 1; }
+.bc-navlink--accent::after { transform: scaleX(0.32); }
+
+/* Reduced motion — keep the colour change, drop the movement */
+@media (prefers-reduced-motion: reduce) {
+  .bc-navlink,
+  .bc-navlink::after,
+  .bc-navlink::before { transition: none; }
+  .bc-navlink:hover { transform: none; }
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Hero sweep — architectural sketching reveal, left → right.
+   Uses clip-path so it animates the filled sweep silhouette as if
+   being drawn across the canvas. Honour reduced-motion.
+   ───────────────────────────────────────────────────────────────── */
+@keyframes bc-sweep-draw {
+  from { clip-path: inset(0 100% 0 0); -webkit-clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0 0 0);    -webkit-clip-path: inset(0 0 0 0); }
+}
+.bc-sweep-anim {
+  clip-path: inset(0 100% 0 0);
+  -webkit-clip-path: inset(0 100% 0 0);
+  animation: bc-sweep-draw 2.6s cubic-bezier(0.32, 0.05, 0.2, 1) 0.35s forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .bc-sweep-anim { animation: none; clip-path: none; -webkit-clip-path: none; }
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   BC asset utilities — recolour SVG silhouettes via CSS mask.
+   Used by Wordmark / Sweep / BCMark React components and as
+   raw class hooks for static templates.
+   ───────────────────────────────────────────────────────────────── */
+
+.bc-mask {
+  display: inline-block;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  /* SVG paths have no explicit fill — force alpha mode so the
+     mask reads transparent vs opaque (black) correctly. */
+  -webkit-mask-mode: alpha;
+  mask-mode: alpha;
+  background-color: currentColor;
+}
+.bc-wordmark { -webkit-mask-image: url('assets/wordmark.svg'); mask-image: url('assets/wordmark.svg'); aspect-ratio: 315.5 / 113.17; }
+.bc-favicon  { -webkit-mask-image: url('assets/favicon.svg');  mask-image: url('assets/favicon.svg');  aspect-ratio: 1 / 1; }
+
+/* Sweep variants — width is set inline; height auto via aspect-ratio */
+.bc-sweep-01 { -webkit-mask-image: url('assets/sweeps/01.svg'); mask-image: url('assets/sweeps/01.svg'); aspect-ratio: 170.85 / 88.38; }
+.bc-sweep-02 { -webkit-mask-image: url('assets/sweeps/02.svg'); mask-image: url('assets/sweeps/02.svg'); aspect-ratio: 247.43 / 67.58; }
+.bc-sweep-03 { -webkit-mask-image: url('assets/sweeps/03.svg'); mask-image: url('assets/sweeps/03.svg'); aspect-ratio: 248.53 / 67.39; }
+.bc-sweep-04 { -webkit-mask-image: url('assets/sweeps/04.svg'); mask-image: url('assets/sweeps/04.svg'); aspect-ratio: 247.43 / 34.33; }
+.bc-sweep-05 { -webkit-mask-image: url('assets/sweeps/05.svg'); mask-image: url('assets/sweeps/05.svg'); aspect-ratio: 260.83 / 153.67; }
+.bc-sweep-06 { -webkit-mask-image: url('assets/sweeps/06.svg'); mask-image: url('assets/sweeps/06.svg'); aspect-ratio: 170.85 / 88.38; }
+.bc-sweep-07 { -webkit-mask-image: url('assets/sweeps/07.svg'); mask-image: url('assets/sweeps/07.svg'); aspect-ratio: 260.83 / 113.55; }
+.bc-sweep-08 { -webkit-mask-image: url('assets/sweeps/08.svg'); mask-image: url('assets/sweeps/08.svg'); aspect-ratio: 260.83 / 113.55; }
+.bc-sweep-09 { -webkit-mask-image: url('assets/sweeps/09.svg'); mask-image: url('assets/sweeps/09.svg'); aspect-ratio: 248.53 / 67.39; }
+.bc-sweep-10 { -webkit-mask-image: url('assets/sweeps/10.svg'); mask-image: url('assets/sweeps/10.svg'); aspect-ratio: 236.81 / 72.16; }
+.bc-sweep-11 { -webkit-mask-image: url('assets/sweeps/11.svg'); mask-image: url('assets/sweeps/11.svg'); aspect-ratio: 260.83 / 113.55; }
+.bc-sweep-12 { -webkit-mask-image: url('assets/sweeps/12.svg'); mask-image: url('assets/sweeps/12.svg'); aspect-ratio: 247.43 / 73.73; }
+.bc-sweep-13 { -webkit-mask-image: url('assets/sweeps/13.svg'); mask-image: url('assets/sweeps/13.svg'); aspect-ratio: 247.43 / 73.29; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   MOBILE RESPONSIVENESS  ·  applies only ≤768px and ≤480px
+   Desktop layout & typography are untouched. These rules override the
+   React inline styles via !important and [style*=] attribute selectors;
+   they do not change copy, colours, fonts or the navigation structure.
+   ═══════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* Homepage renders inside a fixed 1440px artboard → make it fluid */
+  #root [style*="width: 1440px"] { width: 100% !important; max-width: 100% !important; }
+
+  /* Collapse every multi-column grid to a single readable column.
+     (Fixes the spine offset that squeezed page-header H1s into slivers.)
+     Use minmax(0,1fr) + min-width:0 so wide children (carousels, images,
+     long tag strings) can SHRINK instead of forcing the column — and the
+     whole page — wider than the phone viewport. */
+  #root [style*="grid-template-columns"] {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 16px !important;
+  }
+  #root [style*="grid-template-columns"] > * { min-width: 0 !important; }
+  #root img { max-width: 100% !important; }
+
+  /* Flex rows that use the desktop 56px spine gap (e.g. the contact
+     email/LinkedIn block) wrap on mobile — tighten the wrapped gap. */
+  #root [style*="gap: 56px"] { gap: 18px !important; }
+
+  /* Trim oversized desktop padding on full-width bands */
+  #root section, #root article, #root footer {
+    padding-left: 22px !important;
+    padding-right: 22px !important;
+  }
+  /* Footer bars are space-between flex rows — let them wrap on mobile */
+  #root footer {
+    flex-wrap: wrap !important;
+    gap: 8px 22px !important;
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+  }
+  #root section[style*="padding"],
+  #root article[style*="padding"] {
+    padding-top: 28px !important;
+    padding-bottom: 28px !important;
+  }
+
+  /* Sticky nav header — allow wrap, shrink, keep tappable */
+  #root header {
+    height: auto !important;
+    min-height: 52px !important;
+    padding: 8px 20px !important;
+    flex-wrap: wrap !important;
+    gap: 6px 16px !important;
+  }
+  #root header nav {
+    gap: 10px 16px !important;
+    flex-wrap: wrap !important;
+    font-size: 12px !important;
+  }
+  /* Comfortable tap target on each nav item without altering its look */
+  #root header nav a { padding: 10px 0 !important; display: inline-block !important; }
+  /* Shrink the wordmark in the nav only */
+  #root header [style*="width: 170px"],
+  #root header [style*="width: 140px"] { width: 116px !important; }
+
+  /* HERO / PAGE-HEADER headline — readable mobile scale, natural wrap.
+     Tightened a notch so the headline no longer fills the first screen. */
+  #root h1 {
+    font-size: clamp(28px, 7.4vw, 37px) !important;
+    line-height: 1.0 !important;
+    letter-spacing: -0.014em !important;
+    max-width: 12em !important;
+    text-wrap: balance;
+  }
+  /* Hero headline uses hard <br> breaks tuned for the desktop measure;
+     on a phone they force awkward single-word lines. Drop them and let
+     the constrained measure + balance wrap the phrase intentionally. */
+  #root h1 br { display: none !important; }
+
+  /* Oversized display type, scaled down by its inline size.
+     Body copy (≤16px and decimal sizes) is left untouched. */
+  #root [style*="font-size: 96px"] { font-size: clamp(28px,7.4vw,37px) !important; line-height:1.0 !important;  max-width:12em !important; }
+  #root [style*="font-size: 64px"] { font-size: clamp(30px,7.4vw,39px) !important; line-height:1.02 !important; max-width:100% !important; }
+  #root [style*="font-size: 60px"] { font-size: clamp(25px,6.4vw,32px) !important;  line-height:1.16 !important; max-width:100% !important; }
+  #root [style*="font-size: 44px"] { font-size: clamp(28px,7.5vw,38px) !important; line-height:1.1 !important; }
+  #root [style*="font-size: 40px"] { font-size: clamp(27px,7vw,34px) !important;  line-height:1.1 !important; }
+  #root [style*="font-size: 38px"] { font-size: clamp(23px,6vw,29px) !important; line-height:1.14 !important; }
+  #root [style*="font-size: 36px"] { font-size: clamp(20px,5.2vw,25px) !important; line-height:1.22 !important; }
+  #root [style*="font-size: 34px"] { font-size: clamp(23px,6vw,30px) !important;  line-height:1.18 !important; }
+  #root [style*="font-size: 32px"] { font-size: clamp(22px,6vw,30px) !important; }
+  #root [style*="font-size: 30px"] { font-size: clamp(21px,5.6vw,28px) !important; }
+  #root [style*="font-size: 28px"] { font-size: clamp(20px,5.4vw,26px) !important; }
+  #root [style*="font-size: 26px"] { font-size: clamp(19px,5vw,24px) !important; }
+  #root [style*="font-size: 24px"] { font-size: clamp(18px,4.8vw,22px) !important; }
+  #root [style*="font-size: 22px"] { font-size: clamp(17px,4.6vw,20px) !important; }
+
+  /* A forced-nowrap heading must wrap on mobile, never clip horizontally */
+  #root [style*="nowrap"] { white-space: normal !important; }
+
+  /* Large fixed-width element (contact closing wordmark) → fluid */
+  #root [style*="width: 520px"] { width: 100% !important; max-width: 300px !important; }
+
+  /* Experience filter bar — un-stick & tighten so chips fit */
+  #root [style*="top: 76px"] { position: static !important; }
+  #root [style*="padding: 18px 96px"] { padding-left: 20px !important; padding-right: 20px !important; }
+
+  /* Experience detail modal & lightbox sizing */
+  #root [style*="padding: 48px 56px 80px"] { padding: 36px 22px 64px !important; }
+  #root [style*="100vw - 200px"] { max-width: calc(100vw - 56px) !important; max-height: calc(100vh - 120px) !important; }
+
+  /* Carousel dot indicators: a project with many images produces a long
+     fixed-width dot strip that overflows the phone. Hide the dots on
+     mobile — the Prev/Next controls and the NN / NN pill remain, so the
+     carousel stays fully navigable. */
+  #root button[aria-label^="Slide "] { display: none !important; }
+
+  /* ── Client / project logos: dense institutional wall, 2-up ──
+     (overrides the single-column grid collapse above — placed after it) */
+  #root .bc-logo-grid { row-gap: 6px !important; }
+  #root .bc-logo-row {
+    grid-template-columns: repeat(2, 1fr) !important;
+    column-gap: 10px !important;
+  }
+  #root .bc-logo-row > div { height: 78px !important; }
+  #root .bc-logo-row img { height: 42px !important; max-width: 88% !important; }
+
+  /* Contact links — visible & comfortably tappable on mobile (≥44px hit) */
+  #root a[href^="mailto:"],
+  #root a[href*="linkedin.com"] {
+    font-size: 21px !important;
+    line-height: 1.2 !important;
+    padding: 10px 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+
+  /* Footer secondary nav (uppercase mono row) — lift off “tiny”, tighten
+     the spread, give each link a tap target. Scoped to <a>s in the 9px row. */
+  #root footer div[style*="font-size: 9px"] { gap: 16px !important; }
+  #root footer div[style*="font-size: 9px"] a {
+    font-size: 11px !important;
+    padding: 6px 0 !important;
+  }
+
+  /* ── Vertical rhythm compression ───────────────────────────────────
+     Desktop uses generous editorial margins (marginTop 96/64/56/48) and
+     tall fixed-height images sized for a 1440px artboard. On a phone these
+     leave the page feeling stretched and overly spread out top-to-bottom.
+     Scale the large vertical gaps and image heights down to a tighter
+     mobile rhythm. Small gaps (≤36px) and body line-height are untouched. */
+  #root [style*="margin-top: 96px"] { margin-top: 30px !important; }
+  #root [style*="margin-top: 64px"] { margin-top: 20px !important; }
+  #root [style*="margin-top: 56px"] { margin-top: 20px !important; }
+  #root [style*="margin-top: 48px"] { margin-top: 18px !important; }
+  #root [style*="margin-top: 40px"] { margin-top: 14px !important; }
+  #root [style*="margin-top: 36px"] { margin-top: 14px !important; }
+  #root [style*="margin-top: 32px"] { margin-top: 13px !important; }
+  #root [style*="margin-top: 28px"] { margin-top: 12px !important; }
+  #root [style*="margin-top: 26px"] { margin-top: 12px !important; }
+  #root [style*="margin-top: 24px"] { margin-top: 12px !important; }
+  #root [style*="margin-top: 22px"] { margin-top: 10px !important; }
+  #root [style*="margin-top: 20px"] { margin-top: 10px !important; }
+  #root [style*="margin-top: 18px"] { margin-top: 9px !important; }
+  #root [style*="margin-top: 16px"] { margin-top: 9px !important; }
+  #root [style*="margin-top: 14px"] { margin-top: 8px !important; }
+  #root [style*="margin-top: 10px"] { margin-top: 6px !important; }
+  /* Large bottom margins on section intros */
+  #root [style*="margin-bottom: 48px"] { margin-bottom: 18px !important; }
+  #root [style*="margin-bottom: 40px"] { margin-bottom: 16px !important; }
+
+  /* Tall fixed-height media → phone-appropriate heights */
+  #root [style*="height: 580px"] { height: 330px !important; }   /* practice founder portrait */
+  #root [style*="height: 520px"] { height: 320px !important; }   /* homepage portrait */
+  #root [style*="height: 360px"] { height: 218px !important; }   /* requiem lead still */
+
+  /* Hero architectural sweep is drawn at 1880px wide (ART_W + 440) → on a
+     phone that leaves a ~500px-tall band of mostly-empty line. Pull it in
+     to a contained, shallower gesture so it reads as a mark, not a void. */
+  #root [style*="width: 1880px"] {
+    width: 130% !important;
+    margin-left: -15% !important;
+  }
+
+  /* ═══ STRICT COMPRESSION · targeted blocks ═══════════════════════════
+     Class hooks added to the React markup (desktop-identical; only styled
+     here, inside the mobile query). Placed last so they win the source-
+     order tie against the single-column grid-collapse rule above. */
+
+  /* 1 · Contents index — compact, tappable rows (number · title · page).
+     The long descriptive sub-line is dropped on mobile; each row links to
+     its page and clears a 44px tap target via padding. */
+  #root .bc-index { margin-top: 14px !important; }
+  #root .bc-index-row {
+    grid-template-columns: auto 1fr !important;
+    gap: 14px !important;
+    padding: 13px 0 !important;
+    align-items: baseline !important;
+  }
+  #root .bc-index-title { font-size: 20px !important; }
+  #root .bc-index-sub { display: none !important; }
+
+  /* 5 · Homepage pillars — single column, tight title→body rhythm */
+  #root .bc-c-pillars { gap: 18px !important; }
+  #root .bc-c-pillars h3 { margin-top: 8px !important; }
+  #root .bc-c-pillars p { margin-top: 8px !important; }
+
+  /* 2 · Homepage statement — dense but luxurious: a touch more air below
+     the italic statement before the bronze sub-line. */
+  #root .bc-c-statement-sub { margin-top: 18px !important; margin-bottom: 4px !important; }
+
+  /* 5 · Seven-phase framework (homepage) — methodology ledger.
+     A continuous bronze hairline runs down between a fixed number column
+     and the phase label, with hairline rules between rows: reads as a
+     designed index/timeline rather than plain list text. */
+  #root .bc-fw { margin-top: 16px !important; }
+  #root .bc-fw-markers { position: relative !important; gap: 0 !important; }
+  #root .bc-fw-markers::before {
+    content: '' !important; position: absolute !important;
+    left: 34px !important; top: 6px !important; bottom: 6px !important;
+    width: 1px !important; background: var(--hairline-bronze) !important;
+  }
+  #root .bc-fw-markers button {
+    display: grid !important;
+    grid-template-columns: 34px 1fr !important;
+    align-items: baseline !important;
+    column-gap: 18px !important;
+    padding: 13px 0 !important;
+    border-top: 1px solid var(--hairline-bronze-soft) !important;
+  }
+  #root .bc-fw-markers button:first-child { border-top: 0 !important; }
+  #root .bc-fw-markers button > div:first-child { display: none !important; }            /* hanging tick */
+  #root .bc-fw-markers button > div:nth-child(2) {
+    opacity: 1 !important; font-size: 11px !important; letter-spacing: 0.1em !important;
+    color: var(--bronze) !important;
+  }
+  #root .bc-fw-markers button > div:nth-child(3) {
+    margin-top: 0 !important; font-size: 16px !important; opacity: 1 !important;
+    letter-spacing: 0 !important;
+  }
+  #root .bc-fw-body { display: none !important; }
+
+  /* 6 · Homepage experience preview — tighter card stack */
+  #root .bc-c-exp { gap: 14px !important; }
+  #root .bc-c-exp-side { gap: 12px !important; }
+
+  /* 5/6 · Services page pillars + framework — hide redundant column
+     headers, tighten the per-row padding and number→text gaps. */
+  #root .bc-pillar-head { display: none !important; }
+  #root .bc-pillar-row {
+    padding-top: 18px !important;
+    padding-bottom: 20px !important;
+    gap: 12px !important;
+  }
+  #root .bc-pillar-row h3 { margin-top: 8px !important; }
+  #root .bc-pillar-row p { margin-top: 8px !important; }
+  #root .bc-fw2 { column-gap: 0 !important; }
+  #root .bc-fw2-phase {
+    padding-top: 16px !important;
+    padding-bottom: 18px !important;
+    gap: 8px !important;
+  }
+
+  /* 3/4 · Architectural sweeps — lighter and less dominant on mobile so
+     they read as a faint mark behind the type, never a heavy band. */
+  #root .bc-hero-sweep { opacity: 0.34 !important; margin-top: 6px !important; }
+  #root [style*="opacity: 0.55"] { opacity: 0.26 !important; }
+  #root [style*="opacity: 0.42"] { opacity: 0.22 !important; }
+  #root [style*="opacity: 0.35"] { opacity: 0.18 !important; }
+  #root [style*="opacity: 0.32"] { opacity: 0.16 !important; }
+
+  /* Closing contact / footer band — substantially lighter on mobile:
+     reduce the heavy charcoal block's vertical padding and the gap
+     between the email and LinkedIn items. */
+  #root section[style*="var(--charcoal)"] {
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+  }
+  #root [style*="gap: 56px"] { gap: 12px !important; }
+  #root [style*="gap: 44px"] { gap: 12px !important; }
+
+  /* Slightly tighter mono tracking on mobile — meta labels, project
+     captions and footer read denser and more editorial. */
+  #root [style*="letter-spacing: 0.18em"] { letter-spacing: 0.1em !important; }
+  #root [style*="letter-spacing: 0.16em"] { letter-spacing: 0.1em !important; }
+}
+
+@media (max-width: 480px) {
+  #root section, #root article, #root footer {
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+  #root section[style*="padding"],
+  #root article[style*="padding"] {
+    padding-top: 24px !important;
+    padding-bottom: 24px !important;
+  }
+  /* Lighter closing band at the smallest widths */
+  #root section[style*="var(--charcoal)"] {
+    padding-top: 18px !important;
+    padding-bottom: 18px !important;
+  }
+  #root h1 { font-size: clamp(27px, 8vw, 35px) !important; }
+  /* Nav: slightly smaller label only at iPhone widths, tap target intact */
+  #root header nav { font-size: 11px !important; gap: 9px 14px !important; }
+  #root .bc-logo-row > div { height: 74px !important; }
+  #root .bc-logo-row img { height: 40px !important; }
+}

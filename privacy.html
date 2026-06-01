@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Privacy & Data Use · Bustard Consulting</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="How the Bustard Consulting website handles data — briefly, and in plain terms." />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TX8VCPEDJW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TX8VCPEDJW');
+  </script>
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "x05yxoavwo");
+  </script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel" src="js/direction-shared.jsx"></script>
+  <script type="text/babel" src="js/layout.jsx"></script>
+  <script type="text/babel" data-presets="react">
+(function() {
+  const PAD = 86;
+
+  // A labelled note row — mono label on the spine, plain-language body
+  // alongside. Mirrors the contact page's editorial register.
+  function Note({ label, children }) {
+    return (
+      <li style={{
+        display: 'grid', gridTemplateColumns: '180px 1fr',
+        gap: 32, alignItems: 'baseline',
+      }}>
+        <Mono color="var(--charcoal)" size={10} style={{ opacity: 0.5 }}>{label}</Mono>
+        <p style={{ margin: 0, fontSize: 15, lineHeight: 1.75, color: 'var(--charcoal)', opacity: 0.82, maxWidth: 640 }}>
+          {children}
+        </p>
+      </li>
+    );
+  }
+
+  function PrivacyPage() {
+    return (
+      <div data-screen-label="Privacy">
+        <SiteNav active="" />
+
+        <PageHeader
+          number="Appendix"
+          label="Privacy & Data"
+          title="How this site handles data — briefly, and in plain terms."
+          lede="No accounts, no advertising trackers, no data sold. Only anonymous, aggregate analytics that help keep the site clear, fast and useful."
+          sweep={2}
+        />
+
+        {/* A · Privacy & Data Use ─────────────────────────────────────── */}
+        <PageSection number="i." label="Data & Use" spacing={1.3}>
+          <p style={{
+            fontFamily: 'var(--font-display)', fontStyle: 'italic',
+            fontWeight: 400, fontSize: 24, lineHeight: 1.5,
+            color: 'var(--charcoal)', opacity: 0.85, maxWidth: 760, margin: 0,
+          }}>
+            This website exists to introduce the practice and its work —
+            not to gather personal information.
+          </p>
+          <p style={{ marginTop: 26, fontSize: 15, lineHeight: 1.8, color: 'var(--charcoal)', opacity: 0.82, maxWidth: 720 }}>
+            There are no sign-ups, accounts or forms that store your details.
+            The only information collected is anonymous and aggregate — which
+            pages are viewed and how visitors move through the site — used to
+            understand interaction and improve performance and usability.
+          </p>
+
+          <ul style={{ listStyle: 'none', margin: '44px 0 0', padding: 0, display: 'flex', flexDirection: 'column', gap: 30 }}>
+            <Note label="Cookies">
+              A small number of cookies are set by the analytics tools below to
+              measure visits. You can clear or block them in your browser at any
+              time — the site works either way.
+            </Note>
+            <Note label="Third-party services">
+              Analytics are provided by the third parties named in the next
+              section. Their handling of data is governed by their own privacy
+              policies.
+            </Note>
+            <Note label="Contact">
+              Questions about data and privacy can be sent to{' '}
+              <a href="mailto:mark@bustard.co.uk" style={{ color: 'var(--bronze)' }}>mark@bustard.co.uk</a>.
+            </Note>
+          </ul>
+        </PageSection>
+
+        {/* B · Analytics Disclosure ───────────────────────────────────── */}
+        <PageSection number="ii." label="Analytics" background="var(--warm-grey)">
+          <p style={{
+            fontFamily: 'var(--font-display)', fontWeight: 400,
+            fontSize: 28, lineHeight: 1.45, letterSpacing: '-0.004em',
+            color: 'var(--charcoal)', maxWidth: 880, margin: 0,
+          }}>
+            This website uses analytics and behavioural monitoring tools
+            including Google Analytics and Microsoft Clarity to understand user
+            interaction and improve site performance and usability.
+          </p>
+
+          <ul style={{ listStyle: 'none', margin: '40px 0 0', padding: 0, display: 'flex', flexDirection: 'column', gap: 30 }}>
+            <Note label="Google Analytics">
+              Reports anonymous, aggregate traffic — pages viewed, broad device
+              and region data, and how visitors navigate the site.
+            </Note>
+            <Note label="Microsoft Clarity">
+              Provides aggregate insight into how pages are used, helping
+              identify where the experience can be made clearer.
+            </Note>
+          </ul>
+        </PageSection>
+
+        {/* C + D · Hosting and External Links ─────────────────────────── */}
+        <PageSection number="iii." label="Hosting & Links">
+          <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 30 }}>
+            <Note label="Hosting">
+              This site is published as static pages via GitHub Pages. Standard
+              server logs may be retained by the host as part of delivering the
+              site securely.
+            </Note>
+            <Note label="External links">
+              Links to other websites are provided for reference. Those sites
+              are not controlled by Bustard Consulting, and we are not
+              responsible for their content or privacy practices.
+            </Note>
+          </ul>
+        </PageSection>
+
+        {/* E · Contact ────────────────────────────────────────────────── */}
+        <PageSection number="iv." label="Contact" background="var(--warm-grey)">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 96, alignItems: 'start' }}>
+            <p style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: 26, lineHeight: 1.4, color: 'var(--charcoal)', margin: 0, maxWidth: 380 }}>
+              For anything relating to data, privacy or this notice —
+            </p>
+            <div style={{ paddingTop: 6 }}>
+              <Mono color="var(--charcoal)" size={10} style={{ opacity: 0.5 }}>Email</Mono>
+              <div style={{ marginTop: 10, fontFamily: 'var(--font-display)', fontSize: 26 }}>
+                <a href="mailto:mark@bustard.co.uk" style={{ color: 'var(--bronze)' }}>mark@bustard.co.uk</a>
+              </div>
+            </div>
+          </div>
+        </PageSection>
+
+        {/* Closing — charcoal panel with wordmark + descriptor */}
+        <section style={{
+          position: 'relative',
+          padding: `${PAD * 1.5}px ${PAD}px`,
+          background: 'var(--charcoal)',
+          color: 'var(--warm-white)',
+          overflow: 'hidden',
+        }}>
+          <div style={{ position: 'absolute', top: -40, right: -200, width: 1100, color: 'var(--bronze)', opacity: 0.22, pointerEvents: 'none' }}>
+            <Sweep variant={1} />
+          </div>
+          <div style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr auto', gap: 64, alignItems: 'end' }}>
+            <div>
+              <Mono color="var(--bronze)" size={10}>End of document</Mono>
+              <div style={{ marginTop: 32 }}>
+                <Wordmark size={520} color="var(--warm-white)" descriptor />
+              </div>
+            </div>
+            <div style={{ textAlign: 'right' }}>
+              <Mono color="var(--warm-white)" size={9} style={{ opacity: 0.5 }}>Confidential & Proprietary</Mono>
+              <div style={{ marginTop: 8, fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--warm-white)', opacity: 0.6 }}>
+                © Bustard Consulting · MMXXVI
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <footer style={{
+          padding: `22px ${PAD}px`,
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          background: 'var(--warm-white)',
+          borderTop: '1px solid var(--hairline-bronze-soft)',
+        }}>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 9, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--charcoal)', opacity: 0.45 }}>
+            Confidential & Proprietary © Bustard Consulting · 2026
+          </div>
+          <div style={{ display: 'flex', gap: 28, fontFamily: 'var(--font-mono)', fontSize: 9, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--charcoal)', opacity: 0.5 }}>
+            <a href="privacy.html" style={{ color: 'inherit', display: 'inline-block' }}>Privacy</a>
+            <a href="https://www.linkedin.com/in/markbustard/" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', display: 'inline-block' }}>LinkedIn</a>
+            <a href="mailto:mark@bustard.co.uk" style={{ color: 'inherit', display: 'inline-block' }}>Email</a>
+          </div>
+        </footer>
+      </div>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById('root')).render(<PrivacyPage />);
+})();
+  </script>
+  <script src="js/cookie-notice.js" defer></script>
+</body>
+</html>

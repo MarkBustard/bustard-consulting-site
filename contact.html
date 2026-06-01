@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Contact · Bustard Consulting</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TX8VCPEDJW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TX8VCPEDJW');
+  </script>
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "x05yxoavwo");
+  </script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel" src="js/direction-shared.jsx"></script>
+  <script type="text/babel" src="js/layout.jsx"></script>
+  <script type="text/babel" data-presets="react">
+(function() {
+  const PAD = 86;
+
+  function ContactPage() {
+    return (
+      <div data-screen-label="Contact">
+        <SiteNav active="contact" />
+
+        <PageHeader
+          number="§ 05"
+          label="Contact"
+          title="Strategic advisory and executive production for creative, cultural, entertainment and immersive experiences."
+          sweep={6}
+        />
+
+        {/* Contact details — Notation-spine layout. Editorial, light:
+            email + linkedin only, no per-row dividers, generous whitespace. */}
+        <PageSection number="i." label="Principal" spacing={1.4}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 96, alignItems: 'start' }}>
+            <div>
+              <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: 44, lineHeight: 1.15, color: 'var(--charcoal)', margin: 0 }}>
+                Mark Bustard
+              </h2>
+              <div style={{ marginTop: 10, fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--olive)', opacity: 0.85 }}>
+                Founder · Executive Producer
+              </div>
+            </div>
+            <div style={{ paddingTop: 6 }}>
+              <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 36 }}>
+                {[
+                  { k: 'Email',    v: 'mark@bustard.co.uk',   href: 'mailto:mark@bustard.co.uk' },
+                  { k: 'LinkedIn', v: '/in/markbustard',       href: 'https://www.linkedin.com/in/markbustard/' },
+                ].map(r => (
+                  <li key={r.k} style={{
+                    display: 'grid', gridTemplateColumns: '120px 1fr',
+                    gap: 32, alignItems: 'baseline',
+                  }}>
+                    <Mono color="var(--charcoal)" size={10} style={{ opacity: 0.5 }}>{r.k}</Mono>
+                    <div style={{ fontFamily: 'var(--font-display)', fontSize: 26, color: 'var(--bronze)' }}>
+                      <a href={r.href}
+                         style={{ color: 'inherit', display: 'inline-flex', alignItems: 'center', gap: 14 }}
+                         target={r.href.startsWith('http') ? '_blank' : undefined}
+                         rel={r.href.startsWith('http') ? 'noopener noreferrer' : undefined}>
+                        {r.k === 'LinkedIn' && (
+                          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true" style={{ pointerEvents: 'none' }}>
+                            <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.13 1.45-2.13 2.94v5.66H9.37V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/>
+                          </svg>
+                        )}
+                        {r.v}
+                      </a>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </PageSection>
+
+        {/* How engagements begin — same three steps, copy tightened ~40%. */}
+        <PageSection number="ii." label="How engagements begin" background="var(--warm-grey)">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 56 }}>
+            {[
+              { n: '01', t: 'Initial conversation', body: 'A confidential 45-minute call covering project ambition, timing and fit.' },
+              { n: '02', t: 'Written outline',      body: 'A short response outlining potential engagement structures, indicative scope and timing.' },
+              { n: '03', t: 'Engagement',           body: 'Retained, phased or project-based — sized to the project.' },
+            ].map(s => (
+              <article key={s.n}>
+                <Rule color="var(--bronze)" style={{ height: 1, background: 'var(--bronze)', opacity: 0.45 }} />
+                <div style={{ marginTop: 18, display: 'flex', alignItems: 'baseline', gap: 14 }}>
+                  <Mono color="var(--bronze)" size={10}>{s.n}</Mono>
+                  <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: 22, color: 'var(--charcoal)', margin: 0 }}>{s.t}</h3>
+                </div>
+                <p style={{ marginTop: 16, fontSize: 14.5, lineHeight: 1.75, color: 'var(--charcoal)', opacity: 0.8 }}>{s.body}</p>
+              </article>
+            ))}
+          </div>
+        </PageSection>
+
+        {/* Closing — charcoal panel with wordmark+descriptor */}
+        <section style={{
+          position: 'relative',
+          padding: `${PAD * 1.5}px ${PAD}px`,
+          background: 'var(--charcoal)',
+          color: 'var(--warm-white)',
+          overflow: 'hidden',
+        }}>
+          <div style={{ position: 'absolute', top: -40, right: -200, width: 1100, color: 'var(--bronze)', opacity: 0.22, pointerEvents: 'none' }}>
+            <Sweep variant={1} />
+          </div>
+          <div style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr auto', gap: 64, alignItems: 'end' }}>
+            <div>
+              <Mono color="var(--bronze)" size={10}>End of document</Mono>
+              <div style={{ marginTop: 32 }}>
+                <Wordmark size={520} color="var(--warm-white)" descriptor />
+              </div>
+            </div>
+            <div style={{ textAlign: 'right' }}>
+              <Mono color="var(--warm-white)" size={9} style={{ opacity: 0.5 }}>Confidential & Proprietary</Mono>
+              <div style={{ marginTop: 8, fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--warm-white)', opacity: 0.6 }}>
+                © Bustard Consulting · MMXXVI
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <footer style={{
+          padding: `22px ${PAD}px`,
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          background: 'var(--warm-white)',
+          borderTop: '1px solid var(--hairline-bronze-soft)',
+        }}>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 9, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--charcoal)', opacity: 0.45 }}>
+            Confidential & Proprietary © Bustard Consulting · 2026
+          </div>
+          <div style={{ display: 'flex', gap: 28, fontFamily: 'var(--font-mono)', fontSize: 9, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--charcoal)', opacity: 0.5 }}>
+            <a href="privacy.html" style={{ color: 'inherit', display: 'inline-block' }}>Privacy</a>
+            <a href="https://www.linkedin.com/in/markbustard/" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', display: 'inline-block' }}>LinkedIn</a>
+            <a href="mailto:mark@bustard.co.uk" style={{ color: 'inherit', display: 'inline-block' }}>Email</a>
+          </div>
+        </footer>
+      </div>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById('root')).render(<ContactPage />);
+})();
+  </script>
+  <script src="js/cookie-notice.js" defer></script>
+</body>
+</html>
