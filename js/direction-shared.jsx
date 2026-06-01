@@ -127,7 +127,7 @@ function ClientMark({ name, slug, src, logoHeight = 60, nudgeX = 0, noTint = fal
   const [failed, setFailed] = React.useState(!url);
   return (
     <div title={name} style={{
-      height: 160,
+      height: 150,
       display: 'flex', alignItems: 'center', justifyContent: 'center',
       padding: '4px 8px',
       transform: nudgeX ? `translateX(${nudgeX}px)` : undefined,
@@ -136,7 +136,7 @@ function ClientMark({ name, slug, src, logoHeight = 60, nudgeX = 0, noTint = fal
         <img src={url} alt={name}
              onError={() => setFailed(true)}
              style={{
-               height: logoHeight,
+               height: logoHeight * 0.95,
                width: 'auto',
                maxWidth: '100%',
                objectFit: 'contain',

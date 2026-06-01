@@ -258,10 +258,14 @@ a:hover { opacity: 0.65; }
      whole page — wider than the phone viewport. */
   #root [style*="grid-template-columns"] {
     grid-template-columns: minmax(0, 1fr) !important;
-    gap: 24px !important;
+    gap: 16px !important;
   }
   #root [style*="grid-template-columns"] > * { min-width: 0 !important; }
   #root img { max-width: 100% !important; }
+
+  /* Flex rows that use the desktop 56px spine gap (e.g. the contact
+     email/LinkedIn block) wrap on mobile — tighten the wrapped gap. */
+  #root [style*="gap: 56px"] { gap: 18px !important; }
 
   /* Trim oversized desktop padding on full-width bands */
   #root section, #root article, #root footer {
@@ -269,47 +273,60 @@ a:hover { opacity: 0.65; }
     padding-right: 22px !important;
   }
   /* Footer bars are space-between flex rows — let them wrap on mobile */
-  #root footer { flex-wrap: wrap !important; gap: 12px 24px !important; }
+  #root footer {
+    flex-wrap: wrap !important;
+    gap: 8px 22px !important;
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+  }
   #root section[style*="padding"],
   #root article[style*="padding"] {
-    padding-top: 52px !important;
-    padding-bottom: 52px !important;
+    padding-top: 28px !important;
+    padding-bottom: 28px !important;
   }
 
   /* Sticky nav header — allow wrap, shrink, keep tappable */
   #root header {
     height: auto !important;
-    min-height: 60px !important;
-    padding: 12px 20px !important;
+    min-height: 52px !important;
+    padding: 8px 20px !important;
     flex-wrap: wrap !important;
-    gap: 10px 18px !important;
+    gap: 6px 16px !important;
   }
   #root header nav {
-    gap: 14px 18px !important;
+    gap: 10px 16px !important;
     flex-wrap: wrap !important;
     font-size: 12px !important;
   }
+  /* Comfortable tap target on each nav item without altering its look */
+  #root header nav a { padding: 10px 0 !important; display: inline-block !important; }
   /* Shrink the wordmark in the nav only */
   #root header [style*="width: 170px"],
   #root header [style*="width: 140px"] { width: 116px !important; }
 
-  /* HERO / PAGE-HEADER headline — readable mobile scale, natural wrap */
+  /* HERO / PAGE-HEADER headline — readable mobile scale, natural wrap.
+     Tightened a notch so the headline no longer fills the first screen. */
   #root h1 {
-    font-size: clamp(42px, 11vw, 56px) !important;
+    font-size: clamp(28px, 7.4vw, 37px) !important;
     line-height: 1.0 !important;
-    letter-spacing: -0.01em !important;
-    max-width: 100% !important;
+    letter-spacing: -0.014em !important;
+    max-width: 12em !important;
+    text-wrap: balance;
   }
+  /* Hero headline uses hard <br> breaks tuned for the desktop measure;
+     on a phone they force awkward single-word lines. Drop them and let
+     the constrained measure + balance wrap the phrase intentionally. */
+  #root h1 br { display: none !important; }
 
   /* Oversized display type, scaled down by its inline size.
      Body copy (≤16px and decimal sizes) is left untouched. */
-  #root [style*="font-size: 96px"] { font-size: clamp(42px,12vw,56px) !important; line-height:1.0 !important;  max-width:100% !important; }
-  #root [style*="font-size: 64px"] { font-size: clamp(40px,10vw,52px) !important; line-height:1.04 !important; max-width:100% !important; }
-  #root [style*="font-size: 60px"] { font-size: clamp(30px,8vw,40px) !important;  line-height:1.12 !important; max-width:100% !important; }
+  #root [style*="font-size: 96px"] { font-size: clamp(28px,7.4vw,37px) !important; line-height:1.0 !important;  max-width:12em !important; }
+  #root [style*="font-size: 64px"] { font-size: clamp(30px,7.4vw,39px) !important; line-height:1.02 !important; max-width:100% !important; }
+  #root [style*="font-size: 60px"] { font-size: clamp(25px,6.4vw,32px) !important;  line-height:1.16 !important; max-width:100% !important; }
   #root [style*="font-size: 44px"] { font-size: clamp(28px,7.5vw,38px) !important; line-height:1.1 !important; }
   #root [style*="font-size: 40px"] { font-size: clamp(27px,7vw,34px) !important;  line-height:1.1 !important; }
-  #root [style*="font-size: 38px"] { font-size: clamp(25px,6.6vw,32px) !important; line-height:1.12 !important; }
-  #root [style*="font-size: 36px"] { font-size: clamp(24px,6.4vw,32px) !important; line-height:1.15 !important; }
+  #root [style*="font-size: 38px"] { font-size: clamp(23px,6vw,29px) !important; line-height:1.14 !important; }
+  #root [style*="font-size: 36px"] { font-size: clamp(20px,5.2vw,25px) !important; line-height:1.22 !important; }
   #root [style*="font-size: 34px"] { font-size: clamp(23px,6vw,30px) !important;  line-height:1.18 !important; }
   #root [style*="font-size: 32px"] { font-size: clamp(22px,6vw,30px) !important; }
   #root [style*="font-size: 30px"] { font-size: clamp(21px,5.6vw,28px) !important; }
@@ -338,15 +355,174 @@ a:hover { opacity: 0.65; }
      carousel stays fully navigable. */
   #root button[aria-label^="Slide "] { display: none !important; }
 
-  /* ── Client / project logos: 2-up grid at legible, uniform size ──
+  /* ── Client / project logos: dense institutional wall, 2-up ──
      (overrides the single-column grid collapse above — placed after it) */
-  #root .bc-logo-grid { row-gap: 18px !important; }
+  #root .bc-logo-grid { row-gap: 6px !important; }
   #root .bc-logo-row {
     grid-template-columns: repeat(2, 1fr) !important;
-    column-gap: 16px !important;
+    column-gap: 10px !important;
   }
-  #root .bc-logo-row > div { height: 92px !important; }
-  #root .bc-logo-row img { height: 46px !important; max-width: 88% !important; }
+  #root .bc-logo-row > div { height: 78px !important; }
+  #root .bc-logo-row img { height: 42px !important; max-width: 88% !important; }
+
+  /* Contact links — visible & comfortably tappable on mobile (≥44px hit) */
+  #root a[href^="mailto:"],
+  #root a[href*="linkedin.com"] {
+    font-size: 21px !important;
+    line-height: 1.2 !important;
+    padding: 10px 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+
+  /* Footer secondary nav (uppercase mono row) — lift off “tiny”, tighten
+     the spread, give each link a tap target. Scoped to <a>s in the 9px row. */
+  #root footer div[style*="font-size: 9px"] { gap: 16px !important; }
+  #root footer div[style*="font-size: 9px"] a {
+    font-size: 11px !important;
+    padding: 6px 0 !important;
+  }
+
+  /* ── Vertical rhythm compression ───────────────────────────────────
+     Desktop uses generous editorial margins (marginTop 96/64/56/48) and
+     tall fixed-height images sized for a 1440px artboard. On a phone these
+     leave the page feeling stretched and overly spread out top-to-bottom.
+     Scale the large vertical gaps and image heights down to a tighter
+     mobile rhythm. Small gaps (≤36px) and body line-height are untouched. */
+  #root [style*="margin-top: 96px"] { margin-top: 30px !important; }
+  #root [style*="margin-top: 64px"] { margin-top: 20px !important; }
+  #root [style*="margin-top: 56px"] { margin-top: 20px !important; }
+  #root [style*="margin-top: 48px"] { margin-top: 18px !important; }
+  #root [style*="margin-top: 40px"] { margin-top: 14px !important; }
+  #root [style*="margin-top: 36px"] { margin-top: 14px !important; }
+  #root [style*="margin-top: 32px"] { margin-top: 13px !important; }
+  #root [style*="margin-top: 28px"] { margin-top: 12px !important; }
+  #root [style*="margin-top: 26px"] { margin-top: 12px !important; }
+  #root [style*="margin-top: 24px"] { margin-top: 12px !important; }
+  #root [style*="margin-top: 22px"] { margin-top: 10px !important; }
+  #root [style*="margin-top: 20px"] { margin-top: 10px !important; }
+  #root [style*="margin-top: 18px"] { margin-top: 9px !important; }
+  #root [style*="margin-top: 16px"] { margin-top: 9px !important; }
+  #root [style*="margin-top: 14px"] { margin-top: 8px !important; }
+  #root [style*="margin-top: 10px"] { margin-top: 6px !important; }
+  /* Large bottom margins on section intros */
+  #root [style*="margin-bottom: 48px"] { margin-bottom: 18px !important; }
+  #root [style*="margin-bottom: 40px"] { margin-bottom: 16px !important; }
+
+  /* Tall fixed-height media → phone-appropriate heights */
+  #root [style*="height: 580px"] { height: 330px !important; }   /* practice founder portrait */
+  #root [style*="height: 520px"] { height: 320px !important; }   /* homepage portrait */
+  #root [style*="height: 360px"] { height: 218px !important; }   /* requiem lead still */
+
+  /* Hero architectural sweep is drawn at 1880px wide (ART_W + 440) → on a
+     phone that leaves a ~500px-tall band of mostly-empty line. Pull it in
+     to a contained, shallower gesture so it reads as a mark, not a void. */
+  #root [style*="width: 1880px"] {
+    width: 130% !important;
+    margin-left: -15% !important;
+  }
+
+  /* ═══ STRICT COMPRESSION · targeted blocks ═══════════════════════════
+     Class hooks added to the React markup (desktop-identical; only styled
+     here, inside the mobile query). Placed last so they win the source-
+     order tie against the single-column grid-collapse rule above. */
+
+  /* 1 · Contents index — compact, tappable rows (number · title · page).
+     The long descriptive sub-line is dropped on mobile; each row links to
+     its page and clears a 44px tap target via padding. */
+  #root .bc-index { margin-top: 14px !important; }
+  #root .bc-index-row {
+    grid-template-columns: auto 1fr !important;
+    gap: 14px !important;
+    padding: 13px 0 !important;
+    align-items: baseline !important;
+  }
+  #root .bc-index-title { font-size: 20px !important; }
+  #root .bc-index-sub { display: none !important; }
+
+  /* 5 · Homepage pillars — single column, tight title→body rhythm */
+  #root .bc-c-pillars { gap: 18px !important; }
+  #root .bc-c-pillars h3 { margin-top: 8px !important; }
+  #root .bc-c-pillars p { margin-top: 8px !important; }
+
+  /* 2 · Homepage statement — dense but luxurious: a touch more air below
+     the italic statement before the bronze sub-line. */
+  #root .bc-c-statement-sub { margin-top: 18px !important; margin-bottom: 4px !important; }
+
+  /* 5 · Seven-phase framework (homepage) — methodology ledger.
+     A continuous bronze hairline runs down between a fixed number column
+     and the phase label, with hairline rules between rows: reads as a
+     designed index/timeline rather than plain list text. */
+  #root .bc-fw { margin-top: 16px !important; }
+  #root .bc-fw-markers { position: relative !important; gap: 0 !important; }
+  #root .bc-fw-markers::before {
+    content: '' !important; position: absolute !important;
+    left: 34px !important; top: 6px !important; bottom: 6px !important;
+    width: 1px !important; background: var(--hairline-bronze) !important;
+  }
+  #root .bc-fw-markers button {
+    display: grid !important;
+    grid-template-columns: 34px 1fr !important;
+    align-items: baseline !important;
+    column-gap: 18px !important;
+    padding: 13px 0 !important;
+    border-top: 1px solid var(--hairline-bronze-soft) !important;
+  }
+  #root .bc-fw-markers button:first-child { border-top: 0 !important; }
+  #root .bc-fw-markers button > div:first-child { display: none !important; }            /* hanging tick */
+  #root .bc-fw-markers button > div:nth-child(2) {
+    opacity: 1 !important; font-size: 11px !important; letter-spacing: 0.1em !important;
+    color: var(--bronze) !important;
+  }
+  #root .bc-fw-markers button > div:nth-child(3) {
+    margin-top: 0 !important; font-size: 16px !important; opacity: 1 !important;
+    letter-spacing: 0 !important;
+  }
+  #root .bc-fw-body { display: none !important; }
+
+  /* 6 · Homepage experience preview — tighter card stack */
+  #root .bc-c-exp { gap: 14px !important; }
+  #root .bc-c-exp-side { gap: 12px !important; }
+
+  /* 5/6 · Services page pillars + framework — hide redundant column
+     headers, tighten the per-row padding and number→text gaps. */
+  #root .bc-pillar-head { display: none !important; }
+  #root .bc-pillar-row {
+    padding-top: 18px !important;
+    padding-bottom: 20px !important;
+    gap: 12px !important;
+  }
+  #root .bc-pillar-row h3 { margin-top: 8px !important; }
+  #root .bc-pillar-row p { margin-top: 8px !important; }
+  #root .bc-fw2 { column-gap: 0 !important; }
+  #root .bc-fw2-phase {
+    padding-top: 16px !important;
+    padding-bottom: 18px !important;
+    gap: 8px !important;
+  }
+
+  /* 3/4 · Architectural sweeps — lighter and less dominant on mobile so
+     they read as a faint mark behind the type, never a heavy band. */
+  #root .bc-hero-sweep { opacity: 0.34 !important; margin-top: 6px !important; }
+  #root [style*="opacity: 0.55"] { opacity: 0.26 !important; }
+  #root [style*="opacity: 0.42"] { opacity: 0.22 !important; }
+  #root [style*="opacity: 0.35"] { opacity: 0.18 !important; }
+  #root [style*="opacity: 0.32"] { opacity: 0.16 !important; }
+
+  /* Closing contact / footer band — substantially lighter on mobile:
+     reduce the heavy charcoal block's vertical padding and the gap
+     between the email and LinkedIn items. */
+  #root section[style*="var(--charcoal)"] {
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+  }
+  #root [style*="gap: 56px"] { gap: 12px !important; }
+  #root [style*="gap: 44px"] { gap: 12px !important; }
+
+  /* Slightly tighter mono tracking on mobile — meta labels, project
+     captions and footer read denser and more editorial. */
+  #root [style*="letter-spacing: 0.18em"] { letter-spacing: 0.1em !important; }
+  #root [style*="letter-spacing: 0.16em"] { letter-spacing: 0.1em !important; }
 }
 
 @media (max-width: 480px) {
@@ -356,10 +532,17 @@ a:hover { opacity: 0.65; }
   }
   #root section[style*="padding"],
   #root article[style*="padding"] {
-    padding-top: 40px !important;
-    padding-bottom: 40px !important;
+    padding-top: 24px !important;
+    padding-bottom: 24px !important;
   }
-  #root h1 { font-size: clamp(40px, 12vw, 48px) !important; }
-  #root .bc-logo-row > div { height: 84px !important; }
-  #root .bc-logo-row img { height: 42px !important; }
+  /* Lighter closing band at the smallest widths */
+  #root section[style*="var(--charcoal)"] {
+    padding-top: 18px !important;
+    padding-bottom: 18px !important;
+  }
+  #root h1 { font-size: clamp(27px, 8vw, 35px) !important; }
+  /* Nav: slightly smaller label only at iPhone widths, tap target intact */
+  #root header nav { font-size: 11px !important; gap: 9px 14px !important; }
+  #root .bc-logo-row > div { height: 74px !important; }
+  #root .bc-logo-row img { height: 40px !important; }
 }

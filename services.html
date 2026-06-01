@@ -9,6 +9,14 @@
   <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TK8VCPEDJW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TK8VCPEDJW');
+  </script>
 </head>
 <body>
   <div id="root"></div>
@@ -16,7 +24,7 @@
   <script type="text/babel" src="js/layout.jsx"></script>
   <script type="text/babel" data-presets="react">
 (function() {
-  const PAD = 96;
+  const PAD = 86;
 
   const pillars = [
     {
@@ -96,7 +104,7 @@
         <PageSection number="i." label="Pillars">
           <div style={{ maxWidth: 1180, margin: '0 auto' }}>
             {/* Column headers — sit above the first hairline */}
-            <div style={{
+            <div className="bc-pillar-head" style={{
               display: 'grid', gridTemplateColumns: '1.25fr 1fr 1fr',
               gap: 56, paddingBottom: 18,
             }}>
@@ -106,7 +114,7 @@
             </div>
 
             {pillars.map((p, i) => (
-              <article key={p.n} style={{
+              <article key={p.n} className="bc-pillar-row" style={{
                 display: 'grid', gridTemplateColumns: '1.25fr 1fr 1fr',
                 gap: 56, alignItems: 'start',
                 padding: '36px 0 40px',
@@ -181,12 +189,12 @@
               and operational delivery.
             </p>
 
-            <div style={{
+            <div className="bc-fw2" style={{
               display: 'grid', gridTemplateColumns: '1fr 1fr',
               columnGap: 80, rowGap: 0,
             }}>
               {phases.map((p, i) => (
-                <div key={p.n} style={{
+                <div key={p.n} className="bc-fw2-phase" style={{
                   padding: '28px 0 30px',
                   borderTop: '1px solid var(--hairline-bronze)',
                   display: 'grid', gridTemplateColumns: '64px 1fr', gap: 24,

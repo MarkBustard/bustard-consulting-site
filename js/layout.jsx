@@ -3,7 +3,7 @@
 // PageSection (spine + body), SiteFooter.
 // ─────────────────────────────────────────────────────────────────
 
-const PAD = 96;
+const PAD = 86;
 const SPINE_W = 120;
 const SPINE_GAP = 56;
 
@@ -26,7 +26,7 @@ function SiteNav({ active }) {
       <a href="index.html" style={{ display: 'flex', alignItems: 'center', color: 'inherit' }}>
         <Wordmark size={170} color="var(--charcoal)" />
       </a>
-      <nav style={{ display: 'flex', gap: 44, fontFamily: 'var(--font-body)', fontWeight: 300, fontSize: 13 }}>
+      <nav style={{ display: 'flex', gap: 38, fontFamily: 'var(--font-body)', fontWeight: 300, fontSize: 13 }}>
         {items.map(([href, label]) => (
           <a key={href} href={href}
              className={'bc-navlink' + (active === label.toLowerCase() ? ' bc-navlink--accent' : '')}>
@@ -142,7 +142,7 @@ function SiteFooter() {
               Available for strategic advisory, project development and
               executive production.
             </p>
-            <div style={{ marginTop: 48, display: 'flex', flexWrap: 'wrap', gap: 56, fontSize: 14 }}>
+            <div style={{ marginTop: 48, display: 'flex', flexWrap: 'wrap', gap: 44, fontSize: 14 }}>
               <div>
                 <Mono color="var(--warm-white)" size={9} style={{ opacity: 0.5 }}>Email</Mono>
                 <div style={{ marginTop: 8 }}><a href="mailto:mark@bustard.co.uk" style={{ color: 'var(--bronze)', fontFamily: 'var(--font-display)', fontSize: 18 }}>mark@bustard.co.uk</a></div>
@@ -165,7 +165,7 @@ function SiteFooter() {
         </div>
       </section>
       <footer style={{
-        padding: `28px ${PAD}px`,
+        padding: `22px ${PAD}px`,
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         background: 'var(--warm-white)',
         borderTop: '1px solid var(--hairline-bronze-soft)',

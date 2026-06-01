@@ -22,12 +22,12 @@ function FrameworkTimeline() {
   const [active, setActive] = React.useState(0);
 
   return (
-    <div style={{ marginTop: 56 }}>
+    <div className="bc-fw" style={{ marginTop: 48 }}>
       {/* Hairline spine */}
       <div style={{ position: 'relative', height: 1, background: 'var(--hairline-bronze)' }} />
 
       {/* Seven phase markers along the spine */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)' }}>
+      <div className="bc-fw-markers" style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)' }}>
         {phases.map((p, i) => {
           const isActive = active === i;
           return (
@@ -81,14 +81,14 @@ function FrameworkTimeline() {
       </div>
 
       {/* Expanding body row */}
-      <div style={{
-        marginTop: 28,
-        padding: '28px 0 0',
+      <div className="bc-fw-body" style={{
+        marginTop: 20,
+        padding: '22px 0 0',
         borderTop: '1px solid var(--hairline-bronze-soft)',
         display: 'grid',
         gridTemplateColumns: '120px 1fr',
-        gap: 32,
-        minHeight: 130,
+        gap: 28,
+        minHeight: 96,
       }}>
         <div>
           <Mono color="var(--bronze)" size={11}>{phases[active].n}</Mono>
@@ -106,7 +106,7 @@ function FrameworkTimeline() {
             marginTop: 12,
             fontSize: 14.5, lineHeight: 1.75,
             color: 'var(--charcoal)', opacity: 0.78,
-            maxWidth: 720,
+            maxWidth: 620,
           }}>
             {phases[active].body}
           </p>
@@ -118,23 +118,24 @@ function FrameworkTimeline() {
 
 function DirectionC() {
   const ART_W = 1440;
-  const PAD = 88;
+  const PAD = 80;
 
-  // Index entry row used in hero (table of contents)
-  const IndexRow = ({ n, t, sub, side }) => (
-    <div style={{
+  // Index entry row used in hero (table of contents). Now a real link to
+  // its destination page so the contents block is tappable on mobile.
+  const IndexRow = ({ n, t, sub, side, href }) => (
+    <a href={href} className="bc-index-row" style={{
       display: 'grid',
-      gridTemplateColumns: '64px 1fr auto auto',
+      gridTemplateColumns: '64px 1fr auto',
       gap: 28,
       alignItems: 'baseline',
       padding: '22px 0',
       borderTop: '1px solid var(--hairline-bronze-soft)',
+      color: 'inherit', textDecoration: 'none',
     }}>
       <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--bronze)', letterSpacing: '0.05em' }}>{n}</span>
-      <span style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: 22, color: 'var(--charcoal)' }}>{t}</span>
-      <span style={{ fontFamily: 'var(--font-body)', fontWeight: 300, fontSize: 13, color: 'var(--charcoal)', opacity: 0.6 }}>{sub}</span>
-      <span style={{ fontFamily: 'var(--font-mono)', fontSize: 9, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--charcoal)', opacity: 0.42 }}>{side}</span>
-    </div>
+      <span className="bc-index-title" style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: 22, color: 'var(--charcoal)' }}>{t}</span>
+      <span className="bc-index-sub" style={{ fontFamily: 'var(--font-body)', fontWeight: 300, fontSize: 13, color: 'var(--charcoal)', opacity: 0.6 }}>{sub}</span>
+    </a>
   );
 
   return (
@@ -151,7 +152,7 @@ function DirectionC() {
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <Wordmark size={140} color="var(--charcoal)" />
         </div>
-        <nav style={{ display: 'flex', gap: 36, fontFamily: 'var(--font-body)', fontWeight: 300, fontSize: 12 }}>
+        <nav style={{ display: 'flex', gap: 30, fontFamily: 'var(--font-body)', fontWeight: 300, fontSize: 12 }}>
           <a className="bc-navlink" href="practice.html">Practice</a>
           <a className="bc-navlink" href="services.html">Services</a>
           <a className="bc-navlink" href="experience.html">Experience</a>
@@ -180,9 +181,9 @@ function DirectionC() {
           color: 'var(--charcoal)',
           maxWidth: 1240,
         }}>
-          Strategic advisory and executive<br />
-          leadership for live, immersive and<br />
-          IP-led audience experiences.
+          Strategic advisory and <br />
+          Executive Production <br />
+          for live, immersive and IP-led experiences.
         </h1>
 
         {/* Architectural sweep — full-width L→R gesture, matches the
@@ -204,11 +205,11 @@ function DirectionC() {
         </div>
 
         {/* index table */}
-        <div style={{ marginTop: 64 }}>
-          <IndexRow n="01" t="Practice" sub="About the practice and founder" side="p. 02" />
-          <IndexRow n="02" t="Services" sub="Three pillars using one consistent delivery framework" side="p. 03" />
-          <IndexRow n="03" t="Experience" sub="Selected projects — a documentary record" side="p. 04" />
-          <IndexRow n="04" t="Contact" sub="Engagement enquiries" side="p. 05" />
+        <div className="bc-index" style={{ marginTop: 64 }}>
+          <IndexRow n="01" t="Practice" sub="About the practice and founder" side="p. 02" href="practice.html" />
+          <IndexRow n="02" t="Services" sub="Three pillars using one consistent delivery framework" side="p. 03" href="services.html" />
+          <IndexRow n="03" t="Experience" sub="Selected projects — a documentary record" side="p. 04" href="experience.html" />
+          <IndexRow n="04" t="Contact" sub="Engagement enquiries" side="p. 05" href="contact.html" />
           <div style={{ height: 1, background: 'var(--hairline-bronze-soft)' }} />
         </div>
       </section>
@@ -240,7 +241,7 @@ function DirectionC() {
               A bridge between creative ambition{' '}
               <br />and operational reality.
             </p>
-            <p style={{ marginTop: 40, fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: 28, lineHeight: 1.4, color: 'var(--bronze)', maxWidth: 820 }}>
+            <p className="bc-c-statement-sub" style={{ marginTop: 40, fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: 28, lineHeight: 1.4, color: 'var(--bronze)', maxWidth: 820 }}>
               Structuring complex audience experiences.
             </p>
 
@@ -296,11 +297,12 @@ function DirectionC() {
                 <p style={{
                   marginTop: 14,
                   fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: 22, lineHeight: 1.4, color: 'var(--charcoal)',
+                  display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', columnGap: 0, rowGap: 4,
                 }}>
-                  Creative<span style={{ color: 'var(--bronze)', margin: '0 12px' }}>×</span>
-                  Technical<span style={{ color: 'var(--bronze)', margin: '0 12px' }}>×</span>
-                  Commercial<span style={{ color: 'var(--bronze)', margin: '0 12px' }}>×</span>
-                  Governance
+                  <span>Creative</span><span style={{ color: 'var(--bronze)', margin: '0 12px' }}>×</span>
+                  <span>Technical</span><span style={{ color: 'var(--bronze)', margin: '0 12px' }}>×</span>
+                  <span>Commercial</span><span style={{ color: 'var(--bronze)', margin: '0 12px' }}>×</span>
+                  <span>Governance</span>
                 </p>
               </div>
             </div>
@@ -310,7 +312,7 @@ function DirectionC() {
 
       {/* SECTION DIVIDER — full-bleed warm grey + small sweep */}
       <section style={{ padding: `${PAD}px ${PAD}px`, background: 'var(--warm-grey)', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', right: -80, top: 20, width: 720, color: 'var(--bronze)', opacity: 0.55, pointerEvents: 'none' }}>
+        <div style={{ position: 'absolute', right: -80, top: 20, width: 720, color: 'var(--bronze)', opacity: 0.42, pointerEvents: 'none' }}>
           <Sweep variant={2} />
         </div>
         <div style={{ position: 'relative' }}>
@@ -330,7 +332,7 @@ function DirectionC() {
               Pillars
             </div>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 56 }}>
+          <div className="bc-c-pillars" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 46 }}>
             {[
               { n: '01', t: 'Strategic Advisory', body: 'Feasibility, commercial modelling, governance and investor structuring.' },
               { n: '02', t: 'Development Leadership', body: 'Creative, technical and operational blueprinting across multi-agency projects.' },
@@ -339,7 +341,7 @@ function DirectionC() {
               <div key={p.n}>
                 <Mono color="var(--bronze)" size={11}>{p.n}</Mono>
                 <h3 style={{ marginTop: 16, fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: 22, color: 'var(--charcoal)', lineHeight: 1.25 }}>{p.t}</h3>
-                <p style={{ marginTop: 18, fontSize: 13.5, lineHeight: 1.75, color: 'var(--charcoal)', opacity: 0.72 }}>{p.body}</p>
+                <p style={{ marginTop: 18, fontSize: 13.5, lineHeight: 1.75, color: 'var(--charcoal)', opacity: 0.8 }}>{p.body}</p>
               </div>
             ))}
           </div>
@@ -393,7 +395,7 @@ function DirectionC() {
             </div>
           </div>
           <div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: 32 }}>
+            <div className="bc-c-exp" style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: 26 }}>
               <div>
                 {/* Lead — Requiem in Motion */}
                 <a href="experience.html" style={{
@@ -406,7 +408,7 @@ function DirectionC() {
                     width: '100%', height: '100%', objectFit: 'cover', display: 'block',
                   }} />
                 </a>
-                <div style={{ marginTop: 18, display: 'flex', alignItems: 'baseline', justifyContent: 'space-between' }}>
+                <div style={{ marginTop: 14, display: 'flex', alignItems: 'baseline', justifyContent: 'space-between' }}>
                   <div>
                     <div style={{ fontFamily: 'var(--font-display)', fontSize: 18, color: 'var(--charcoal)' }}>Requiem in Motion</div>
                     <div style={{ marginTop: 4, fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--bronze)' }}>Executive Producer · JV led by Gideon Berger Studios</div>
@@ -414,7 +416,7 @@ function DirectionC() {
                   <Mono size={10} color="var(--charcoal)" style={{ opacity: 0.4 }}>2024</Mono>
                 </div>
               </div>
-              <div style={{ display: 'grid', gridTemplateRows: '1fr 1fr', gap: 24 }}>
+              <div className="bc-c-exp-side" style={{ display: 'grid', gridTemplateRows: '1fr 1fr', gap: 20 }}>
                 <div>
                   {/* Terminal 1 · Glastonbury 2025 */}
                   <a href="experience.html" style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
@@ -493,7 +495,7 @@ function DirectionC() {
             {/* Logo grid — five rows matching the reference (5 / 6 / 6 / 7 / 7).
                 Each row is its own grid so column counts can differ row to row
                 while logos sit on a consistent vertical rhythm. */}
-            <div className="bc-logo-grid" style={{ marginTop: 56, display: 'flex', flexDirection: 'column', rowGap: 8 }}>
+            <div className="bc-logo-grid" style={{ marginTop: 56, display: 'flex', flexDirection: 'column', rowGap: 6 }}>
               {[
                 // Row 1 — 5 marks. Heights tuned to match the reference:
                 // wide square / tall composite marks get more height,
@@ -581,7 +583,7 @@ function DirectionC() {
               Available for strategic advisory, project development and
               executive production engagements.
             </p>
-            <div style={{ marginTop: 48, display: 'flex', flexWrap: 'wrap', gap: 56, fontSize: 14 }}>
+            <div style={{ marginTop: 48, display: 'flex', flexWrap: 'wrap', gap: 44, fontSize: 14 }}>
               <div>
                 <Mono color="var(--warm-white)" size={9} style={{ opacity: 0.5 }}>Email</Mono>
                 <div style={{ marginTop: 8 }}><a href="mailto:mark@bustard.co.uk" style={{ color: 'var(--bronze)' }}>mark@bustard.co.uk</a></div>
@@ -606,7 +608,7 @@ function DirectionC() {
 
       {/* FOOTER */}
       <footer style={{
-        padding: `28px ${PAD}px`,
+        padding: `22px ${PAD}px`,
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         background: 'var(--warm-white)',
         borderTop: '1px solid var(--hairline-bronze-soft)',
